@@ -4,7 +4,11 @@
 
 import unittest
 from datetime import date
-from datehelper import previous_business_day, first_day_of_month
+from datehelper import (
+    previous_business_day,
+    first_day_of_month,
+    next_business_day,
+)
 
 
 class DateHelperTester(unittest.TestCase):
@@ -18,3 +22,18 @@ class DateHelperTester(unittest.TestCase):
         dt: date = date(2024, 8, 5)
         first: date = first_day_of_month(dt)
         self.assertEqual(date(2024, 8, 1), first)
+
+        dt2: date = date(2024, 6, 15)
+        first_day_of_june: date = first_day_of_month(dt2)
+        first_bus_day_of_june: date = first_day_of_month(
+            dt2, business_day=True
+        )
+        self.assertEqual(date(2024, 6, 1), first_day_of_june)
+        self.assertEqual(date(2024, 6, 3), first_bus_day_of_june)
+
+    def test_next_business_day(self) -> None:
+        self.assertEqual(date(2024, 8, 5), next_business_day(date(2024, 8, 2)))
+        self.assertEqual(date(2024, 8, 2), next_business_day(date(2024, 8, 1)))
+        self.assertEqual(date(2024, 8, 5), next_business_day(date(2024, 8, 3)))
+        self.assertEqual(date(2024, 8, 5), next_business_day(date(2024, 8, 4)))
+        self.assertEqual(date(2024, 8, 6), next_business_day(date(2024, 8, 5)))

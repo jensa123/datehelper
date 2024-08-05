@@ -36,7 +36,9 @@ def previous_business_day(dt: date | None = None) -> date:
     return dt - timedelta(days=sub)
 
 
-def first_day_of_month(dt: date | None) -> date:
+def first_day_of_month(
+    dt: date | None = None, /, *, business_day: bool = False
+) -> date:
     """Get the first day of the month of the given date.
 
     If argument is omitted or None then the first day of the month
@@ -53,4 +55,25 @@ def first_day_of_month(dt: date | None) -> date:
         first: date = first_day_of_month(dt)  # 2024-08-01
     """
     dt = _coalesce_to_today(dt)
-    return date(dt.year, dt.month, 1)
+    result: date = date(dt.year, dt.month, 1)
+    if business_day and result.isoweekday() in (6, 7):
+        return next_business_day(result)
+    return result
+
+
+def next_business_day(dt: date | None = None) -> date:
+    """Get the next business day based on a given date.
+
+    Args:
+        dt: The relative date from which to calculate the next business day.
+    Returns:
+        The next business day.
+    """
+    dt = _coalesce_to_today(dt)
+    wd: int = dt.isoweekday()
+    add: int = 1
+    if wd == 5:
+        add = 3
+    elif wd == 6:
+        add = 2
+    return dt + timedelta(days=add)
