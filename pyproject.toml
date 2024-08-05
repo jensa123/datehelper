@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=62.6.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "datehelper"
+version = "0.0.1"
+authors = [
+  { name="jensa123", email="jensa123@users.noreply.github.com" },
+]
+description = "Contains useful date utility functions"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]

@@ -1,0 +1,16 @@
+.DS_Store
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.pyc
+.venv
+*egg-info/
