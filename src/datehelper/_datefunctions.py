@@ -106,3 +106,27 @@ def first_day_of_year(
     if business_day and _is_weekend(result):
         return next_business_day(result)
     return result
+
+
+def last_day_of_month(
+    dt: date | None = None, /, *, business_day: bool = False
+) -> date:
+    """Get the last day of the month relative to dt. If argument dt is omitted
+    the last day of the month is calculated relative to date.today().
+
+    Args:
+        dt: The relative date from which to calculate the last day of the month.
+        business_day: If True then the last business day of the month will be returned.
+    Returns:
+        The last day of the month.
+    """
+    dt: date = _coalesce_to_today(dt)
+    result: date = date(
+        dt.year + 1 if dt.month == 12 else dt.year,
+        1 if dt.month == 12 else dt.month + 1,
+        1,
+    )
+    result = result - timedelta(days=1)
+    if business_day and _is_weekend(result):
+        return previous_business_day(result)
+    return result

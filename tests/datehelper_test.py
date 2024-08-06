@@ -9,6 +9,7 @@ from datehelper import (
     first_day_of_month,
     next_business_day,
     first_day_of_year,
+    last_day_of_month,
 )
 
 
@@ -46,6 +47,27 @@ class DateHelperTester(unittest.TestCase):
             first_day_of_year(date(2023, 3, 14), business_day=True),
         )
 
+    def test_last_day_of_month(self) -> None:
+        self.assertEqual(
+            date(2024, 8, 31), last_day_of_month(date(2024, 8, 6))
+        )
+        self.assertEqual(
+            date(2024, 8, 30),
+            last_day_of_month(date(2024, 8, 6), business_day=True),
+        )
+        self.assertEqual(
+            date(2024, 6, 28),
+            last_day_of_month(date(2024, 6, 21), business_day=True),
+        )
+        self.assertEqual(
+            date(2024, 6, 30),
+            last_day_of_month(date(2024, 6, 21)),
+        )
+
+
+def run_tests():
+    unittest.main(module=__name__, verbosity=5)
+
 
 if __name__ == "__main__":
-    unittest.main()
+    run_tests()

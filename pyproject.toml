@@ -16,6 +16,11 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+keywords = ["date", "date utility"]
 
 [tool.setuptools.dynamic]
 version = {attr = "datehelper.__version__"}
+
+[project.urls]
+Repository = "https://github.com/jensa123/datehelper"
+Issues = "https://github.com/jensa123/datehelper/issues"

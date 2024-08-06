@@ -14,6 +14,24 @@ Package containing useful date functions commonly used within finance.
 - [License](#license)
 
 ## Main features
+The package contains a variety of date functions that are commonly useful within
+financial risk- and return calculations, or for obtaining the market value of
+a portfolio for the last business day.
+
+The package has a flat structure, so all functions are available
+from the package namespace.
+
+### Examples
+Below are some example use cases.
+
+```python
+from datetime import date
+from datehelper import previous_business_day, first_day_of_year
+
+dt = date(2024, 8, 5)
+prev_bus_dt = previous_business_day(dt)  # 2024-08-02
+first_year_dt = first_day_of_year(dt)  # 2024-01-01
+```
 
 ## How to install
 This package is not hosted on any package repository, so the only way
@@ -37,6 +55,12 @@ The unit testing framework used is `unittest` and they can be executed from the
 command line by running (from the project root folder):
 
 `python -m unittest discover -s ./tests -p "*_test.py" -t . -v`
+
+As the unit test modules belong to a package (called tests) they can,
+for convenience, also be executed from the command line by executing
+(from the project root folder) the package:
+
+`python tests/`
 
 ## License
 [MIT](https://github.com/jensa123/datehelper/blob/main/LICENSE)
