@@ -8,6 +8,7 @@ from datehelper import (
     previous_business_day,
     first_day_of_month,
     next_business_day,
+    first_day_of_year,
 )
 
 
@@ -37,3 +38,14 @@ class DateHelperTester(unittest.TestCase):
         self.assertEqual(date(2024, 8, 5), next_business_day(date(2024, 8, 3)))
         self.assertEqual(date(2024, 8, 5), next_business_day(date(2024, 8, 4)))
         self.assertEqual(date(2024, 8, 6), next_business_day(date(2024, 8, 5)))
+
+    def test_first_day_of_year(self) -> None:
+        self.assertEqual(date(2024, 1, 1), first_day_of_year(date(2024, 8, 6)))
+        self.assertEqual(
+            date(2023, 1, 2),
+            first_day_of_year(date(2023, 3, 14), business_day=True),
+        )
+
+
+if __name__ == "__main__":
+    unittest.main()

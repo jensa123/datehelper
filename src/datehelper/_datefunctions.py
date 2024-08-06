@@ -9,6 +9,10 @@ def _coalesce_to_today(dt: date | None) -> date:
     return dt
 
 
+def _is_weekend(dt: date) -> bool:
+    return dt.isoweekday() in (6, 7)
+
+
 def previous_business_day(dt: date | None = None) -> date:
     """Get the previous business day. A business day is defined
     as any weekday other than Saturday and Sunday.
@@ -46,6 +50,7 @@ def first_day_of_month(
 
     Args:
         dt: The relative date from which to calculate the first day of the month.
+        business_day: If True then the first business day of the month will be returned.
     Returns:
         The first day of the month.
 
@@ -56,7 +61,7 @@ def first_day_of_month(
     """
     dt = _coalesce_to_today(dt)
     result: date = date(dt.year, dt.month, 1)
-    if business_day and result.isoweekday() in (6, 7):
+    if business_day and _is_weekend(result):
         return next_business_day(result)
     return result
 
@@ -77,3 +82,27 @@ def next_business_day(dt: date | None = None) -> date:
     elif wd == 6:
         add = 2
     return dt + timedelta(days=add)
+
+
+def first_day_of_year(
+    dt: date | None = None, /, *, business_day: bool = False
+) -> date:
+    """Get the first day of the year relative to dt. If argument dt is omitted
+    the first day of the year is calculated relative to date.today().
+
+    Args:
+        dt: The relative date from which to calculate the first day of the year.
+        business_day: If True then the first business day of the year will be returned.
+    Returns:
+        The first day of the year.
+
+    Examples::
+
+        dt: date = date(2024, 8, 6)
+        first: date = first_day_of_year(dt)  # 2024-01-01
+    """
+    dt: date = _coalesce_to_today(dt)
+    result: date = date(dt.year, 1, 1)
+    if business_day and _is_weekend(result):
+        return next_business_day(result)
+    return result

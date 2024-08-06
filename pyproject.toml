@@ -4,15 +4,18 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "datehelper"
-version = "0.0.1"
+dynamic = ["version"]
 authors = [
   { name="jensa123", email="jensa123@users.noreply.github.com" },
 ]
 description = "Contains useful date utility functions"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.12"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+
+[tool.setuptools.dynamic]
+version = {attr = "datehelper.__version__"}
