@@ -15,6 +15,17 @@
 			"**/*.pyc": true,
 			"**/*__pycache__*": true,
 			"**/*egg-info": true
-		}
+		},
+		"python.testing.unittestArgs": [
+			"-v",
+			"-s",
+			"./tests",
+			"-p",
+			"*_test.py",
+			"-t",
+			"."
+		],
+		"python.testing.unittestEnabled": true,
+		"python.testing.pytestEnabled": false
 	}
 }

@@ -62,5 +62,9 @@ for convenience, also be executed from the command line by executing
 
 `python tests/`
 
+### Unit test integration in Visual Studio Code
+If you are using Visual Studio Code then you can execute all unit tests
+via the Testing GUI.
+
 ## License
 [MIT](https://github.com/jensa123/datehelper/blob/main/LICENSE)
